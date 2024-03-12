@@ -1,0 +1,24 @@
+port: 8000
+name: speecht5
+route_prefix: /speecht5
+num_replicas: 1
+cpus_per_worker: 24
+gpus_per_worker: 0
+deepspeed: false
+workers_per_group: 2
+device: CPU
+ipex:
+  enabled: true
+  precision: fp32
+model_description:
+  model_id_or_path: {path_to_model}/speecht5_tts
+  tokenizer_name_or_path: {path_to_model}/speecht5_tts
+  vcoder_name_or_path: {path_to_voice_coder_model}/speecht5_hifigan
+  speaker_embedding_path: {path_to_voice_embedding_model}/speaker/
+  chat_processor: ChatModelTTS
+  gpt_base_model: true
+  prompt:
+    intro: ''
+    human_id: ''
+    bot_id: ''
+    stop_words: []
