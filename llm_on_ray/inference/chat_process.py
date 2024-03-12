@@ -172,6 +172,14 @@ class ChatModelwithImage(ChatModel):
         print(f"prompt is {prompt}")
         return prompt, images
 
+class ChatModelTTS(ChatModel):
+    def __init__(self, intro, human_id, bot_id, stop_words):
+        super().__init__(intro, human_id, bot_id, stop_words)
+
+    def prepare_prompt(self, messages: list):
+        """Prepare prompt from history messages."""
+        print(messages)
+        return dict(messages[0])["content"]
 
 if __name__ == "__main__":
     process_tool = ChatModelGptJ(

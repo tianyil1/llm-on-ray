@@ -69,6 +69,8 @@ class ModelDescription(BaseModel):
     model_id_or_path: Union[str, None] = None
     bigdl: bool = False
     tokenizer_name_or_path: Union[str, None] = None
+    vcoder_name_or_path: Union[str, None] = None
+    speaker_embedding_path: Union[str, None] = None
     chat_processor: Union[str, None] = None
     gpt_base_model: bool = False
     quantized_model_id_or_path: Union[str, None] = None

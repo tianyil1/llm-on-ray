@@ -57,6 +57,7 @@ class PredictorDeployment:
         self.use_deepspeed = infer_conf.deepspeed
         self.use_vllm = infer_conf.vllm.enabled
         self.is_mllm = True if chat_processor_name in ["ChatModelwithImage"] else False
+        self.is_ttsllm = True if chat_processor_name in ["ChatModelTTS"] else False
 
         if self.use_deepspeed:
             from llm_on_ray.inference.deepspeed_predictor import DeepSpeedPredictor
@@ -71,6 +72,9 @@ class PredictorDeployment:
             from llm_on_ray.inference.mllm_predictor import MllmPredictor
 
             self.predictor = MllmPredictor(infer_conf)
+        elif self.is_ttsllm:
+            from llm_on_ray.inference.ttsllm_predictor import TTSllmPredictor
+            self.predictor = TTSllmPredictor(infer_conf)
         else:
             from llm_on_ray.inference.transformer_predictor import TransformerPredictor
 
